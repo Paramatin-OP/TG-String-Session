@@ -13,12 +13,12 @@ from pyrogram.errors import (
 )
 
 API_TEXT = """Hi, {}.
-This is Pyrogram's String Session Generator Bot. I will generate String Session of your Telegram Account.
+This is Pyrogram's String Session Generator Bot. I will generate String Session For Black-Lightning Userbot (Rebirthed) of your Telegram Account.
 
-By @Discovery_Updates
+By [Lightning Support](https://t.me/lightning_support_group)
 
-Now send your `API_ID` same as `APP_ID` to Start Generating Session."""
-HASH_TEXT = "Now send your `API_HASH`.\n\nPress /cancel to Cancel Task."
+Now Proceed With your `TG_APP_ID` same as `APP_ID` to Start Generating Session."""
+HASH_TEXT = "Now send your `TG_API_HASH`.\n\nPress /cancel to Cancel Task."
 PHONE_NUMBER_TEXT = (
     "Now send your Telegram account's Phone number in International Format. \n"
     "Including Country code. Example: **+14154566376**\n\n"
@@ -36,14 +36,14 @@ async def genStr(_, msg: Message):
     try:
         check_api = int(api.text)
     except Exception:
-        await msg.reply("`API_ID` is Invalid.\nPress /start to Start again.")
+        await msg.reply("`TG_APP_ID` is Invalid.\nPress /start to Start again.")
         return
     api_id = api.text
     hash = await bot.ask(chat.id, HASH_TEXT)
     if await is_cancel(msg, hash.text):
         return
     if not len(hash.text) >= 30:
-        await msg.reply("`API_HASH` is Invalid.\nPress /start to Start again.")
+        await msg.reply("`TG_API_HASH` is Invalid.\nPress /start to Start again.")
         return
     api_hash = hash.text
     while True:
@@ -75,7 +75,7 @@ async def genStr(_, msg: Message):
         await msg.reply(f"You have Floodwait of {e.x} Seconds")
         return
     except ApiIdInvalid:
-        await msg.reply("API ID and API Hash are Invalid.\n\nPress /start to Start again.")
+        await msg.reply("TG_APP_ID and TG_API_HASH are Invalid.\n\nPress /start to Start again.")
         return
     except PhoneNumberInvalid:
         await msg.reply("Your Phone Number is Invalid.\n\nPress /start to Start again.")
@@ -85,10 +85,10 @@ async def genStr(_, msg: Message):
             chat.id, ("An OTP is sent to your phone number, "
                       "Please enter OTP in `1 2 3 4 5` format. __(Space between each numbers!)__ \n\n"
                       "If Bot not sending OTP then try /restart and Start Task again with /start command to Bot.\n"
-                      "Press /cancel to Cancel."), timeout=300)
+                      "Press /cancel to Cancel."), timeout=600)
 
     except TimeoutError:
-        await msg.reply("Time limit reached of 5 min.\nPress /start to Start again.")
+        await msg.reply("Time limit reached of 10 min.\nPress /start to Start again.")
         return
     if await is_cancel(msg, otp.text):
         return
@@ -106,10 +106,10 @@ async def genStr(_, msg: Message):
             two_step_code = await bot.ask(
                 chat.id, 
                 "Your account have Two-Step Verification.\nPlease enter your Password.\n\nPress /cancel to Cancel.",
-                timeout=300
+                timeout=600
             )
         except TimeoutError:
-            await msg.reply("`Time limit reached of 5 min.\n\nPress /start to Start again.`")
+            await msg.reply("`Time limit reached of 10 min.\n\nPress /start to Start again.`")
             return
         if await is_cancel(msg, two_step_code.text):
             return
@@ -124,7 +124,7 @@ async def genStr(_, msg: Message):
         return
     try:
         session_string = await client.export_session_string()
-        await client.send_message("me", f"#PYROGRAM #STRING_SESSION\n\n```{session_string}``` \n\nBy [@StringSessionGen_Bot](tg://openmessage?user_id=1472531255) \nA Bot By @Discovery_Updates")
+        await client.send_message("me", f"#PYROGRAM #STRING_SESSION #BLACK_LIGHTNING\n\n```{session_string}``` \n\nBy [Black-Lightning Userbot](https://t.me/Lightning_support_group)\nPlesae Give your Valuable Feedback at [Feedback Form](https://docs.google.com/forms/d/e/1FAIpQLSfJbCYg25mvAHiFqzGDoMipRwKV58sx6buz6xvCbT0uP8dRKA/viewform)")
         await client.disconnect()
         text = "String Session is Successfully Generated.\nClick on Below Button."
         reply_markup = InlineKeyboardMarkup(
@@ -145,10 +145,10 @@ async def restart(_, msg: Message):
 @bot.on_message(filters.private & filters.command("help"))
 async def restart(_, msg: Message):
     out = f"""
-Hi, {msg.from_user.mention}. This is Pyrogram Session String Generator Bot. \
-I will give you `STRING_SESSION` for your UserBot.
+Hi, {msg.from_user.mention}. This is Pyrogram Session Generator Bot. \
+I will give you `STRING_SESSION` for your [Black-Lightning UserBot](https://github.com/KeinShin/Black-Lightning/tree/rebirth).
 
-It needs `API_ID`, `API_HASH`, Phone Number and One Time Verification Code. \
+It needs `TG_APP_ID`, `TG_API_HASH`, Phone Number and One Time Verification Code. \
 Which will be sent to your Phone Number.
 You have to put **OTP** in `1 2 3 4 5` this format. __(Space between each numbers!)__
 
@@ -159,11 +159,8 @@ Must Join Channel for Bot Updates !!
     reply_markup = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton('Support Group', url='https://t.me/linux_repo'),
-                InlineKeyboardButton('Developer', url='https://t.me/AbirHasan2005')
-            ],
-            [
-                InlineKeyboardButton('Bots Updates Channel', url='https://t.me/Discovery_Updates'),
+                InlineKeyboardButton('Lightning Support', url='https://t.me/lightning_support_group'),
+                InlineKeyboardButton('Support Channel', url='https://t.me/Black_lightning_channel')
             ]
         ]
     )
